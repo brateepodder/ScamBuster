@@ -100,6 +100,17 @@ public class MainActivity extends AppCompatActivity {
 
         clearButton = findViewById(R.id.button);
 
+        searchEditText.setOnFocusChangeListener(new View.OnFocusChangeListener() {
+            @Override
+            public void onFocusChange(View v, boolean hasFocus) {
+                if (hasFocus) {
+                    clearButton.setVisibility(View.VISIBLE);
+                } else {
+                    clearButton.setVisibility(View.GONE);
+                }
+            }
+        });
+
         clearButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
