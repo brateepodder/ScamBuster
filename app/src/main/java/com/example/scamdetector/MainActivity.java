@@ -39,6 +39,8 @@ public class MainActivity extends AppCompatActivity {
 
     private EditText searchEditText;
 
+    private Button clearButton;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -93,6 +95,15 @@ public class MainActivity extends AppCompatActivity {
                     retrievePhoneNumbers();
                 }
                 searchNumbers(searchQuery);
+            }
+        });
+
+        clearButton = findViewById(R.id.button);
+
+        clearButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                searchEditText.setText("");
             }
         });
 
