@@ -1,0 +1,30 @@
+<resources xmlns:tools="http://schemas.android.com/tools">
+    <!-- Base application theme. -->
+    <style name="Base.Theme.ScamDetector" parent="Theme.Material3.DayNight.NoActionBar">
+        <!-- Customize your light theme here. -->
+        <item name="colorPrimary">@color/my_light_primary</item>
+        <item name="toolbarStyle">@style/ScamDetector.Toolbar</item>
+    </style>
+
+    <style name="ScamDetector.Toolbar" parent="Widget.MaterialComponents.Toolbar">
+        <item name="android:background">#FFFFFF</item>
+        <item name="android:elevation">0dp</item>
+        <item name="elevation">0dp</item>
+    </style>
+
+    <style name="ScamDetector.Toolbar.Title" parent="TextAppearance.Widget.AppCompat.Toolbar.Title">
+        <item name="android:textStyle">bold</item>
+        <item name="android:textSize">40sp</item>
+        <item name="android:textColor">#777777</item>
+    </style>
+
+    <style name="Widget.MaterialComponents.TextInputLayout.FilledBox" parent="Base.Widget.MaterialComponents.TextInputLayout">
+        <!-- underline color in FilledBox style -->
+        <item name="boxStrokeColor">#06d6a0</item>
+
+        <!-- The color of the label when it is collapsed and the text field is active -->
+        <item name="hintTextColor">#808080</item>
+        ....
+    </style>
+    <style name="Theme.ScamDetector" parent="Base.Theme.ScamDetector" />
+</resources>

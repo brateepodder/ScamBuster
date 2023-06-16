@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="VcsDirectoryMappings">
+    <mapping directory="$PROJECT_DIR$" vcs="Git" />
+    <mapping directory="$PROJECT_DIR$/BrateeSite" vcs="Git" />
+    <mapping directory="$PROJECT_DIR$/BrateeSite/BrateeSite" vcs="Git" />
+    <mapping directory="$PROJECT_DIR$/MATLAB/AntiScam" vcs="Git" />
+    <mapping directory="$PROJECT_DIR$/MATLAB/PreeclampsiaStudyDataAnalysis" vcs="Git" />
+    <mapping directory="$PROJECT_DIR$/Other folder/BrateeSite" vcs="Git" />
+    <mapping directory="$PROJECT_DIR$/Other folder/BrateeSite/BrateeSite" vcs="Git" />
+    <mapping directory="$PROJECT_DIR$/Other folder/MATLAB/AntiScam" vcs="Git" />
+    <mapping directory="$PROJECT_DIR$/Other folder/MATLAB/PreeclampsiaStudyDataAnalysis" vcs="Git" />
+    <mapping directory="$PROJECT_DIR$/Other folder/React_Native_jobs" vcs="Git" />
+    <mapping directory="$PROJECT_DIR$/Other folder/WeatherApp" vcs="Git" />
+    <mapping directory="$PROJECT_DIR$/React_Native_jobs" vcs="Git" />
+    <mapping directory="$PROJECT_DIR$/WeatherApp" vcs="Git" />
+  </component>
+</project>
