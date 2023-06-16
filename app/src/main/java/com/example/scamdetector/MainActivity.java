@@ -32,6 +32,7 @@ import java.util.List;
 public class MainActivity extends AppCompatActivity {
 
     private static final int PERMISSIONS_REQUEST_READ_SMS = 123;
+    private static final int PERMISSIONS_REQUEST_READ_CONTACTS = 456;
 
     private ListView phoneNumberListView;
     private ArrayAdapter<String> phoneNumberAdapter;
@@ -61,6 +62,13 @@ public class MainActivity extends AppCompatActivity {
         } else {
             // Permission already granted, proceed to retrieve phone numbers
             retrievePhoneNumbers();
+        }
+
+        if (ContextCompat.checkSelfPermission(this, Manifest.permission.READ_SMS) != PackageManager.PERMISSION_GRANTED) {
+            ActivityCompat.requestPermissions(this, new String[]{Manifest.permission.READ_SMS}, PERMISSIONS_REQUEST_READ_SMS);
+        } else {
+            // Permission already granted, proceed to check READ_CONTACTS permission
+            checkReadContactsPermission();
         }
 
         // Set up click listener for the phone number list items
@@ -109,6 +117,16 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
+    }
+
+    private void checkReadContactsPermission() {
+        if (ContextCompat.checkSelfPermission(this, Manifest.permission.READ_CONTACTS) != PackageManager.PERMISSION_GRANTED) {
+            // Permission not granted, request it
+            ActivityCompat.requestPermissions(this, new String[]{Manifest.permission.READ_CONTACTS}, PERMISSIONS_REQUEST_READ_CONTACTS);
+        } else {
+            // Permission already granted, proceed to retrieve phone numbers
+            retrievePhoneNumbers();
+        }
     }
 
     private boolean isContactName(String contactName) {
@@ -235,7 +253,12 @@ public class MainActivity extends AppCompatActivity {
         super.onRequestPermissionsResult(requestCode, permissions, grantResults);
         if (requestCode == PERMISSIONS_REQUEST_READ_SMS) {
             if (grantResults.length > 0 && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
-                // Permission granted, proceed to retrieve phone numbers
+                // READ_SMS permission granted, check READ_CONTACTS permission
+                checkReadContactsPermission();
+            }
+        } else if (requestCode == PERMISSIONS_REQUEST_READ_CONTACTS) {
+            if (grantResults.length > 0 && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
+                // READ_CONTACTS permission granted, proceed to retrieve phone numbers
                 retrievePhoneNumbers();
             }
         }
