@@ -67,23 +67,10 @@ public class MainActivity extends AppCompatActivity {
         phoneNumberListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                String selectedContactOrNumber = phoneNumberList.get(position);
-
-                // Check if the selected item is a contact name or a phone number
-                if (isContactName(selectedContactOrNumber)) {
-                    // Retrieve the corresponding phone number for the contact name
-                    String phoneNumber = getPhoneNumber(selectedContactOrNumber);
-
-                    // Pass the phone number to the ConversationActivity
-                    Intent intent = new Intent(MainActivity.this, ConversationActivity.class);
-                    intent.putExtra("phoneNumber", phoneNumber);
-                    startActivity(intent);
-                } else {
-                    // Pass the selected phone number to the ConversationActivity
-                    Intent intent = new Intent(MainActivity.this, ConversationActivity.class);
-                    intent.putExtra("phoneNumber", selectedContactOrNumber);
-                    startActivity(intent);
-                }
+                String selectedNumber = phoneNumberList.get(position);
+                Intent intent = new Intent(MainActivity.this, ConversationActivity.class);
+                intent.putExtra("phoneNumber", selectedNumber);
+                startActivity(intent);
             }
         });
 
@@ -111,67 +98,6 @@ public class MainActivity extends AppCompatActivity {
 
     }
 
-    private boolean isContactName(String contactName) {
-        // Query the Contacts database to check if the given string exists as a contact name
-        String[] projection = {ContactsContract.Contacts.DISPLAY_NAME};
-        String selection = ContactsContract.Contacts.DISPLAY_NAME + " = ?";
-        String[] selectionArgs = {contactName};
-
-        Cursor cursor = getContentResolver().query(
-                ContactsContract.Contacts.CONTENT_URI,
-                projection,
-                selection,
-                selectionArgs,
-                null
-        );
-
-        boolean isContact = (cursor != null && cursor.getCount() > 0);
-        if (cursor != null) {
-            cursor.close();
-        }
-
-        return isContact;
-    }
-
-    private String getContactName(String phoneNumber) {
-        Uri uri = Uri.withAppendedPath(ContactsContract.PhoneLookup.CONTENT_FILTER_URI, Uri.encode(phoneNumber));
-
-        String[] projection = {ContactsContract.PhoneLookup.DISPLAY_NAME};
-
-        Cursor cursor = getContentResolver().query(uri, projection, null, null, null);
-
-        String contactName = null;
-        if (cursor != null && cursor.moveToFirst()) {
-            contactName = cursor.getString(cursor.getColumnIndexOrThrow(ContactsContract.PhoneLookup.DISPLAY_NAME));
-            cursor.close();
-        }
-
-        return contactName;
-    }
-
-    private String getPhoneNumber(String contactName) {
-        // Query the Contacts database to retrieve the phone number associated with the given contact name
-        String[] projection = {ContactsContract.CommonDataKinds.Phone.NUMBER};
-        String selection = ContactsContract.Contacts.DISPLAY_NAME + " = ?";
-        String[] selectionArgs = {contactName};
-
-        Cursor cursor = getContentResolver().query(
-                ContactsContract.CommonDataKinds.Phone.CONTENT_URI,
-                projection,
-                selection,
-                selectionArgs,
-                null
-        );
-
-        String phoneNumber = null;
-        if (cursor != null && cursor.moveToFirst()) {
-            phoneNumber = cursor.getString(cursor.getColumnIndexOrThrow(ContactsContract.CommonDataKinds.Phone.NUMBER));
-            cursor.close();
-        }
-
-        return phoneNumber;
-    }
-
     private void searchNumbers(String searchQuery) {
         ArrayList<String> filteredList = new ArrayList<>();
 
@@ -183,6 +109,9 @@ public class MainActivity extends AppCompatActivity {
             for (String phoneNumber : phoneNumberList) {
                 if (phoneNumber.contains(searchQuery)) {
                     filteredList.add(phoneNumber);
+                }
+                if (filteredList == null) {
+                    filteredList.add("No results found");
                 }
             }
         }
@@ -210,14 +139,7 @@ public class MainActivity extends AppCompatActivity {
 
                 // Check if the phone number is already present in the newPhoneNumberList
                 if (!newPhoneNumberList.contains(phoneNumber)) {
-                    String contactName = getContactName(phoneNumber);
-                    if (contactName != null) {
-                        if (!newPhoneNumberList.contains(contactName)) {
-                            newPhoneNumberList.add(contactName);
-                        }
-                    } else {
-                        newPhoneNumberList.add(phoneNumber);
-                    }
+                    newPhoneNumberList.add(phoneNumber);
                 }
             }
 

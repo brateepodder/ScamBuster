@@ -5,7 +5,6 @@ import android.net.Uri;
 import android.os.Bundle;
 import android.provider.Telephony;
 import android.view.MenuItem;
-import android.widget.TextView;
 
 import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
@@ -13,11 +12,10 @@ import androidx.appcompat.widget.Toolbar;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
-import android.provider.ContactsContract;
-import java.util.List;
-
+import java.util.Locale;
 
 public class ConversationActivity extends AppCompatActivity {
     private RecyclerView messagesRecyclerView;
@@ -42,70 +40,11 @@ public class ConversationActivity extends AppCompatActivity {
         Bundle extras = getIntent().getExtras();
         if (extras != null) {
             String phoneNumber = extras.getString("phoneNumber");
-
-            // Check if the received phoneNumber is a contact name
-            if (isContactName(phoneNumber)) {
-                phoneNumber = getPhoneNumber(phoneNumber);
-            }
             ArrayList<String> messages = retrieveMessages(phoneNumber);
             ArrayList<Date> timestamps = retrieveTimestamps(phoneNumber);
             messageAdapter.setMessages(messages, timestamps);
         }
     }
-
-    private boolean isContactName(String contactName) {
-        // Query the Contacts database to check if the given string exists as a contact name
-        String[] projection = {ContactsContract.Contacts.DISPLAY_NAME};
-        String selection = ContactsContract.Contacts.DISPLAY_NAME + " = ?";
-        String[] selectionArgs = {contactName};
-
-        Cursor cursor = getContentResolver().query(
-                ContactsContract.Contacts.CONTENT_URI,
-                projection,
-                selection,
-                selectionArgs,
-                null
-        );
-
-        boolean isContact = (cursor != null && cursor.getCount() > 0);
-        if (cursor != null) {
-            cursor.close();
-        }
-
-        return isContact;
-    }
-
-    private String getPhoneNumber(String contactName) {
-        // Query the Contacts database to retrieve the phone number associated with the given contact name
-        String[] projection = {ContactsContract.CommonDataKinds.Phone.NUMBER};
-        String selection = ContactsContract.Contacts.DISPLAY_NAME + " = ?";
-        String[] selectionArgs = {contactName};
-
-        Cursor cursor = getContentResolver().query(
-                ContactsContract.CommonDataKinds.Phone.CONTENT_URI,
-                projection,
-                selection,
-                selectionArgs,
-                null
-        );
-
-        String phoneNumber = null;
-        if (cursor != null && cursor.moveToFirst()) {
-            phoneNumber = cursor.getString(cursor.getColumnIndexOrThrow(ContactsContract.CommonDataKinds.Phone.NUMBER));
-        }
-
-        if (cursor != null) {
-            cursor.close();
-        }
-
-        // If no matching phone number found, use contactName as the phone number
-        if (phoneNumber == null) {
-            phoneNumber = contactName;
-        }
-
-        return phoneNumber;
-    }
-
 
     @Override
     public boolean onSupportNavigateUp() {
@@ -113,10 +52,7 @@ public class ConversationActivity extends AppCompatActivity {
         return true;
     }
 
-    private ArrayList<String> retrieveMessages(String number) {
-        // Check if the number is a contact name
-        String phoneNumber = getPhoneNumber(number);
-
+    private ArrayList<String> retrieveMessages(String phoneNumber) {
         Uri uri = Uri.parse("content://sms/inbox");
         String[] projection = {"address", "body", "date"};
         String selection = "address = ?";
@@ -137,10 +73,7 @@ public class ConversationActivity extends AppCompatActivity {
         return messages;
     }
 
-    private ArrayList<Date> retrieveTimestamps(String number) {
-        // Check if the number is a contact name
-        String phoneNumber = getPhoneNumber(number);
-
+    private ArrayList<Date> retrieveTimestamps(String phoneNumber) {
         Uri uri = Uri.parse("content://sms/inbox");
         String[] projection = {"address", "date"};
         String selection = "address = ?";
@@ -162,4 +95,3 @@ public class ConversationActivity extends AppCompatActivity {
         return timestamps;
     }
 }
-

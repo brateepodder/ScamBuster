@@ -66,7 +66,7 @@ public class MessageAdapter extends RecyclerView.Adapter<MessageAdapter.MessageV
     }
 
     private String formatDate(Date date) {
-        SimpleDateFormat dateFormat = new SimpleDateFormat("EEE dd, yyyy", Locale.getDefault());
+        SimpleDateFormat dateFormat = new SimpleDateFormat("EEE dd, MMM yyyy", Locale.getDefault());
         return dateFormat.format(date);
     }
 
