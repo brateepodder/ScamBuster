@@ -18,6 +18,7 @@ import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ListView;
+import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.ActionBar;
@@ -38,18 +39,23 @@ public class MainActivity extends AppCompatActivity {
     private List<String> phoneNumberList;
 
     private EditText searchEditText;
-
     private Button clearButton;
+    private TextView NoResultsFound;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
+        // Initialize phoneNumberListView
         phoneNumberListView = findViewById(R.id.phoneNumberListView);
 
         // Initialize EditText
         searchEditText = findViewById(R.id.searchEditText);
+
+        // Initialize NoResultsFound
+        NoResultsFound = findViewById(R.id.NoResultsFound);
+        NoResultsFound.setVisibility(View.GONE);
 
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
@@ -132,9 +138,11 @@ public class MainActivity extends AppCompatActivity {
                 if (phoneNumber.contains(searchQuery)) {
                     filteredList.add(phoneNumber);
                 }
-                if (filteredList == null) {
-                    filteredList.add("No results found");
-                }
+            }
+            if (filteredList.size() == 0) {
+                NoResultsFound.setVisibility(View.VISIBLE);
+            } else {
+                NoResultsFound.setVisibility(View.GONE);
             }
         }
 

@@ -5,8 +5,8 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="#ffffff"
-    tools:context=".MainActivity"
-    android:focusableInTouchMode="true">
+    android:focusableInTouchMode="true"
+    tools:context=".MainActivity">
 
     <androidx.appcompat.widget.Toolbar
         android:id="@+id/toolbar"
@@ -32,7 +32,18 @@
         android:layout_marginEnd="10dp"
         android:layout_marginBottom="15dp"
         android:divider="@android:color/transparent"
-        android:dividerHeight="10.0sp" />
+        android:dividerHeight="10.0sp">
+    </ListView>
+
+    <TextView
+        android:id="@+id/NoResultsFound"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="138dp"
+        android:layout_marginTop="230dp"
+        android:text="No Results Found"
+        android:textColor="#808070"
+        android:textSize="17sp" />
 
     <Button
         android:id="@+id/button"
