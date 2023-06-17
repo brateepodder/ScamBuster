@@ -11,20 +11,40 @@
     android:background="#ffffff"
     tools:context=".ConversationActivity">
 
-    <androidx.appcompat.widget.Toolbar
-        android:id="@+id/toolbar"
-        android:layout_width="match_parent"
-        android:background="#ffffff"
-        android:elevation="0dp"
-        android:title="ScamBuster"
-        android:layout_height="?attr/actionBarSize"
-        app:titleTextAppearance="@style/ScamDetector.Toolbar.Title"
-        app:titleTextColor="#777777" />
+    <RelativeLayout android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:id="@+id/Toolbar"
+        android:height="130dp">
+
+        <androidx.appcompat.widget.Toolbar
+                android:id="@+id/toolbar"
+                android:layout_width="match_parent"
+                android:background="#ffffff"
+                android:elevation="0dp"
+                android:title="ScamBuster"
+                android:layout_height="120dp"
+                android:gravity="top"
+                android:minHeight="120dp"
+                app:titleTextAppearance="@style/ScamDetector.Toolbar.Title"
+                app:titleTextColor="#777777"
+                android:contentInsetStart="8dp"/>
+
+        <Button
+            android:id="@+id/button"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="125dp"
+            android:layout_marginTop="70dp"
+            android:backgroundTint="#06d6a0"
+            android:text="Check Messages" />
+
+    </RelativeLayout>
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/messagesRecyclerView"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_below="@id/toolbar" />
+        android:layout_below="@id/Toolbar" />
 
 </RelativeLayout>

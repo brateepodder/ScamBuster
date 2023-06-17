@@ -1,5 +1,22 @@
 package com.example.scamdetector;
 
+import android.graphics.Bitmap;
+import android.graphics.Canvas;
+import android.graphics.drawable.BitmapDrawable;
+import android.graphics.drawable.Drawable;
+import android.os.Bundle;
+import android.view.View;
+import android.view.ViewGroup;
+import android.widget.AdapterView;
+import android.widget.Button;
+import android.widget.ListView;
+import android.widget.RelativeLayout;
+import android.widget.Toast;
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.content.ContextCompat;
+import androidx.core.view.ViewCompat;
+import androidx.core.view.ViewPropertyAnimatorCompat;
+import androidx.core.view.ViewPropertyAnimatorListener;
 import android.Manifest;
 import android.content.Intent;
 import android.content.pm.PackageManager;
@@ -37,7 +54,6 @@ public class MainActivity extends AppCompatActivity {
     private ListView phoneNumberListView;
     private ArrayAdapter<String> phoneNumberAdapter;
     private List<String> phoneNumberList;
-
     private EditText searchEditText;
     private Button clearButton;
     private TextView NoResultsFound;
@@ -47,13 +63,9 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        // Initialize phoneNumberListView
+        // Initializing
         phoneNumberListView = findViewById(R.id.phoneNumberListView);
-
-        // Initialize EditText
         searchEditText = findViewById(R.id.searchEditText);
-
-        // Initialize NoResultsFound
         NoResultsFound = findViewById(R.id.NoResultsFound);
         NoResultsFound.setVisibility(View.GONE);
 

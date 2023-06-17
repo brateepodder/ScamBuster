@@ -1,78 +1,78 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:background="#ffffff"
-    android:focusableInTouchMode="true"
-    tools:context=".MainActivity">
-
-    <androidx.appcompat.widget.Toolbar
-        android:id="@+id/toolbar"
-        android:layout_width="match_parent"
-        android:layout_height="?attr/actionBarSize"
-        android:background="#ffffff"
-        android:elevation="0dp"
-        android:title="ScamBuster"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:popupTheme="@style/ThemeOverlay.MaterialComponents.Light"
-        app:titleMarginTop="10dp"
-        app:titleTextAppearance="@style/ScamDetector.Toolbar.Title"
-        app:titleTextColor="#777777" />
-
-    <ListView
-        android:id="@+id/phoneNumberListView"
+    <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        xmlns:tools="http://schemas.android.com/tools"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_marginStart="10dp"
-        android:layout_marginTop="200dp"
-        android:layout_marginEnd="10dp"
-        android:layout_marginBottom="15dp"
-        android:divider="@android:color/transparent"
-        android:dividerHeight="10.0sp">
-    </ListView>
+        android:background="#ffffff"
+        android:focusableInTouchMode="true"
+        tools:context=".MainActivity">
 
-    <TextView
-        android:id="@+id/NoResultsFound"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="138dp"
-        android:layout_marginTop="230dp"
-        android:text="No Results Found"
-        android:textColor="#808070"
-        android:textSize="17sp" />
+        <androidx.appcompat.widget.Toolbar
+            android:id="@+id/toolbar"
+            android:layout_width="match_parent"
+            android:layout_height="?attr/actionBarSize"
+            android:background="#ffffff"
+            android:elevation="0dp"
+            android:title="ScamBuster"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:popupTheme="@style/ThemeOverlay.MaterialComponents.Light"
+            app:titleMarginTop="10dp"
+            app:titleTextAppearance="@style/ScamDetector.Toolbar.Title"
+            app:titleTextColor="#777777" />
 
-    <Button
-        android:id="@+id/button"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignParentEnd="true"
-        android:layout_marginTop="98dp"
-        android:layout_marginEnd="100dp"
-        android:maxWidth="60dp"
-        android:maxHeight="50dp"
-        android:minWidth="60dp"
-        android:minHeight="50dp"
-        android:text="✖"
-        android:textColor="#808080" />
+        <ListView
+            android:id="@+id/phoneNumberListView"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginStart="10dp"
+            android:layout_marginTop="200dp"
+            android:layout_marginEnd="10dp"
+            android:layout_marginBottom="15dp"
+            android:divider="@android:color/transparent"
+            android:dividerHeight="10.0sp">
+        </ListView>
 
-    <com.google.android.material.textfield.TextInputLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+        <TextView
+            android:id="@+id/NoResultsFound"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="138dp"
+            android:layout_marginTop="230dp"
+            android:text="No Results Found"
+            android:textColor="#808070"
+            android:textSize="17sp" />
 
-    </com.google.android.material.textfield.TextInputLayout>
+        <Button
+            android:id="@+id/button"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentEnd="true"
+            android:layout_marginTop="98dp"
+            android:layout_marginEnd="100dp"
+            android:maxWidth="60dp"
+            android:maxHeight="50dp"
+            android:minWidth="60dp"
+            android:minHeight="50dp"
+            android:text="✖"
+            android:textColor="#808080" />
 
-    <com.google.android.material.textfield.TextInputEditText
-        android:id="@+id/searchEditText"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginLeft="80dp"
-        android:layout_marginTop="100dp"
-        android:layout_marginRight="140dp"
-        android:hint="Search Number" />
+        <com.google.android.material.textfield.TextInputLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/searchEditText"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="80dp"
+            android:layout_marginTop="100dp"
+            android:layout_marginRight="140dp"
+            android:hint="Search Number" />
 
 
-</RelativeLayout>
+    </RelativeLayout>
