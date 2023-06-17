@@ -14,6 +14,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.Date;
 import java.util.Locale;
 
@@ -43,6 +44,8 @@ public class ConversationActivity extends AppCompatActivity {
             ArrayList<String> messages = retrieveMessages(phoneNumber);
             ArrayList<Date> timestamps = retrieveTimestamps(phoneNumber);
             messageAdapter.setMessages(messages, timestamps);
+            int lastItemPosition = messageAdapter.getItemCount() - 1;
+            messagesRecyclerView.scrollToPosition(lastItemPosition);
         }
     }
 
@@ -78,7 +81,7 @@ public class ConversationActivity extends AppCompatActivity {
         String[] projection = {"address", "date"};
         String selection = "address = ?";
         String[] selectionArgs = {phoneNumber};
-        String sortOrder = "date ASC";
+        String sortOrder = "date DESC";
 
         Cursor cursor = getContentResolver().query(uri, projection, selection, selectionArgs, sortOrder);
         ArrayList<Date> timestamps = new ArrayList<>();
