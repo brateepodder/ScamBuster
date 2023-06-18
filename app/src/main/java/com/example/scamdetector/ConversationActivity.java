@@ -5,6 +5,7 @@ import android.net.Uri;
 import android.os.Bundle;
 import android.provider.Telephony;
 import android.view.MenuItem;
+import android.widget.Button;
 
 import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
@@ -21,6 +22,7 @@ import java.util.Locale;
 public class ConversationActivity extends AppCompatActivity {
     private RecyclerView messagesRecyclerView;
     private MessageAdapter messageAdapter;
+    private Button CheckMessages;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -37,6 +39,8 @@ public class ConversationActivity extends AppCompatActivity {
         messagesRecyclerView.setLayoutManager(new LinearLayoutManager(this));
         messageAdapter = new MessageAdapter();
         messagesRecyclerView.setAdapter(messageAdapter);
+
+        Button checkMessages = findViewById(R.id.button);
 
         Bundle extras = getIntent().getExtras();
         if (extras != null) {
