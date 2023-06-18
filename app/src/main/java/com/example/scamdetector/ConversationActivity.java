@@ -30,7 +30,7 @@ public class ConversationActivity extends AppCompatActivity {
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
         ActionBar actionBar = getSupportActionBar();
-        actionBar.setTitle("Messages");
+        actionBar.setTitle("");
         actionBar.setDisplayHomeAsUpEnabled(true);
 
         messagesRecyclerView = findViewById(R.id.messagesRecyclerView);
