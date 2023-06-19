@@ -53,7 +53,7 @@
         android:id="@+id/ratingRelativeLayout"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginLeft="290dp"
+        android:layout_marginLeft="295dp"
         android:background="#ffffff"
         android:gravity="center_vertical|center_horizontal"
         android:width="@id/messagesRelativeLayout">
@@ -68,8 +68,8 @@
             android:backgroundTint="#ef476f"
             android:includeFontPadding="false"
             android:maxHeight="8dp"
-            android:minWidth="72dp"
-            android:text="8/10"
+            android:maxWidth="68dp"
+            android:text="0.8"
             android:textSize="12sp"
             app:iconPadding="3dp" />
 
