@@ -21,14 +21,11 @@ import android.Manifest;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.database.Cursor;
-import android.graphics.Color;
-import android.provider.ContactsContract;
 import android.net.Uri;
 import android.os.Bundle;
 import android.provider.Telephony;
 import android.text.Editable;
 import android.text.TextWatcher;
-import android.view.KeyEvent;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
@@ -36,6 +33,7 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ListView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.ActionBar;
@@ -56,7 +54,10 @@ public class MainActivity extends AppCompatActivity {
     private List<String> phoneNumberList;
     private EditText searchEditText;
     private Button clearButton;
+    private TextView textViewResult;
     private TextView NoResultsFound;
+    private EditText editTextRequest;
+    private Button buttonSendRequest;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -68,6 +69,7 @@ public class MainActivity extends AppCompatActivity {
         searchEditText = findViewById(R.id.searchEditText);
         NoResultsFound = findViewById(R.id.NoResultsFound);
         NoResultsFound.setVisibility(View.GONE);
+        textViewResult = findViewById(R.id.textViewResult);
 
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
@@ -135,14 +137,24 @@ public class MainActivity extends AppCompatActivity {
                 searchEditText.setText("");
             }
         });
+        // Initialize the EditText and Button for the request
+        editTextRequest = findViewById(R.id.EditText);
+        buttonSendRequest = findViewById(R.id.buttonSendRequest);
 
+        buttonSendRequest.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                String requestText = editTextRequest.getText().toString();
+                sendRequestToHuggingFace(requestText);
+            }
+        });
     }
 
     private void searchNumbers(String searchQuery) {
         ArrayList<String> filteredList = new ArrayList<>();
 
         // If search query is empty, show all phone numbers
-        if (searchQuery == "") {
+        if (searchQuery.isEmpty()) {
             retrievePhoneNumbers();
         } else {
             // Filter phone numbers based on search query
@@ -193,6 +205,28 @@ public class MainActivity extends AppCompatActivity {
         phoneNumberListView.setAdapter(phoneNumberAdapter);
     }
 
+    private void sendRequestToHuggingFace(String requestText) {
+        // Make API request to Hugging Face and handle the response
+        ApiService apiService = new ApiService();
+        apiService.makeRequest(requestText, new ApiService.Callback() {
+            @Override
+            public void onResponse(final String result) {
+                runOnUiThread(new Runnable() {
+                    @Override
+                    public void run() {
+                        // Display the result to the user
+                        textViewResult.setText("Result from Hugging Face: " + result);
+                    }
+                });
+            }
+
+            @Override
+            public void onFailure(Exception e) {
+                // Handle failure
+                e.printStackTrace();
+            }
+        });
+    }
 
     @Override
     public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
