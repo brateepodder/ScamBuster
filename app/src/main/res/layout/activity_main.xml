@@ -94,6 +94,7 @@
         android:backgroundTintMode="add"
         android:text="@string/send_request"
         android:textColor="#808080"
+        android:backgroundTint="#ef476f"
         android:visibility="visible"
         tools:visibility="visible" />
 
