@@ -22,7 +22,6 @@ import java.util.Locale;
 public class ConversationActivity extends AppCompatActivity {
     private RecyclerView messagesRecyclerView;
     private MessageAdapter messageAdapter;
-    private Button CheckMessages;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -37,10 +36,8 @@ public class ConversationActivity extends AppCompatActivity {
 
         messagesRecyclerView = findViewById(R.id.messagesRecyclerView);
         messagesRecyclerView.setLayoutManager(new LinearLayoutManager(this));
-        messageAdapter = new MessageAdapter();
+        messageAdapter = new MessageAdapter(this);
         messagesRecyclerView.setAdapter(messageAdapter);
-
-        Button checkMessages = findViewById(R.id.button);
 
         Bundle extras = getIntent().getExtras();
         if (extras != null) {
@@ -52,7 +49,6 @@ public class ConversationActivity extends AppCompatActivity {
             messagesRecyclerView.scrollToPosition(lastItemPosition);
         }
     }
-
     @Override
     public boolean onSupportNavigateUp() {
         onBackPressed();

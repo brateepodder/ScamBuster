@@ -11,14 +11,14 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="300dp"
-        android:height="2dp"
+        android:height="50dp"
         android:backgroundTint="#ef476f"
         android:includeFontPadding="false"
         android:maxWidth="68dp"
         android:maxHeight="8dp"
         android:text="Scan Now!"
         android:textSize="12sp"
-        app:iconPadding="3dp" />
+        app:iconPadding="0dp" />
 
     <TextView
         android:id="@+id/reviewFromHF"
