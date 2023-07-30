@@ -1,6 +1,7 @@
 package com.example.scamdetector;
 
 import android.Manifest;
+import android.app.Activity;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.database.Cursor;
@@ -9,6 +10,7 @@ import android.os.Bundle;
 import android.provider.Telephony;
 import android.text.Editable;
 import android.text.TextWatcher;
+import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
@@ -23,6 +25,10 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 import androidx.core.app.ActivityCompat;
 import androidx.core.content.ContextCompat;
+
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -40,11 +46,13 @@ public class MainActivity extends AppCompatActivity {
     private TextView NoResultsFound;
     private EditText editTextRequest;
     private Button buttonSendRequest;
+    private ApiService apiService;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+        apiService = new ApiService();
 
         // Initializing
         phoneNumberListView = findViewById(R.id.phoneNumberListView);
@@ -127,7 +135,7 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 String requestText = editTextRequest.getText().toString();
-                sendRequestToHuggingFace(requestText);
+                sendToHuggingface(requestText);
             }
         });
     }
@@ -187,28 +195,49 @@ public class MainActivity extends AppCompatActivity {
         phoneNumberListView.setAdapter(phoneNumberAdapter);
     }
 
-    private void sendRequestToHuggingFace(String requestText) {
-        // Make API request to Hugging Face and handle the response
-        ApiService apiService = new ApiService();
-        apiService.makeRequest(requestText, new ApiService.Callback() {
+    private void sendToHuggingface(String message) {
+        apiService.makeRequest(message, new ApiService.Callback() {
             @Override
-            public void onResponse(final String result) {
-                runOnUiThread(new Runnable() {
-                    @Override
-                    public void run() {
-                        // Display the result to the user
-                        textViewResult.setText("Result from Hugging Face: " + result);
+            public void onResponse(String result) {
+                // This method will be called when the API call is successful
+                Log.d("HuggingFaceResponse", result); // Add this log statement to display the full API response
+
+                try {
+                    JSONArray jsonArray = new JSONArray(result);
+
+                    for (int i = 0; i < jsonArray.length(); i++) {
+                        JSONObject labelInfo = jsonArray.getJSONObject(i);
+                        String label = labelInfo.getString("label");
+                        if (label.equals("LABEL_1")) {
+                            double labelScore = labelInfo.getDouble("score");
+                            // Convert the score to percentage
+                            int scorePercentage = (int) (labelScore * 100);
+
+                            // Set the result in textViewResult
+                            runOnUiThread(new Runnable() {
+                                @Override
+                                public void run() {
+                                    String displayText = scorePercentage + "% scam/spam";
+                                    textViewResult.setText(displayText);
+                                }
+                            });
+
+                            // Exit the loop once LABEL_1 is found
+                            break;
+                        }
                     }
-                });
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
             }
 
             @Override
             public void onFailure(Exception e) {
-                // Handle failure
-                e.printStackTrace();
+                // Handle API call failure here if needed
             }
         });
     }
+
 
     @Override
     public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
