@@ -3,6 +3,7 @@ package com.example.scamdetector;
 import android.content.ClipData;
 import android.content.ClipboardManager;
 import android.content.Context;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -18,14 +19,19 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 import android.app.Activity;
+
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
+
 import java.util.Locale;
 
 public class MessageAdapter extends RecyclerView.Adapter<MessageAdapter.MessageViewHolder> {
 
     private List<String> messages;
     private List<Date> timestamps;
-    private Context context;
-    private ApiService apiService;
+    private final Context context;
+    private final ApiService apiService;
 
     public MessageAdapter(Context context) {
         this.messages = new ArrayList<>();
@@ -69,13 +75,35 @@ public class MessageAdapter extends RecyclerView.Adapter<MessageAdapter.MessageV
             @Override
             public void onResponse(String result) {
                 // This method will be called when the API call is successful
-                // Set the result in reviewFromHF TextView
-                ((Activity) context).runOnUiThread(new Runnable() {
-                    @Override
-                    public void run() {
-                        reviewFromHF.setText(result);
+                Log.d("HuggingFaceResponse", result); // Add this log statement to display the full API response
+
+                try {
+                    JSONArray jsonArray = new JSONArray(result);
+
+                    for (int i = 0; i < jsonArray.length(); i++) {
+                        JSONObject labelInfo = jsonArray.getJSONObject(i);
+                        String label = labelInfo.getString("label");
+                        if (label.equals("LABEL_1")) {
+                            double labelScore = labelInfo.getDouble("score");
+                            // Convert the score to percentage
+                            int scorePercentage = (int) (labelScore * 100);
+
+                            // Set the result in reviewFromHF TextView
+                            ((Activity) context).runOnUiThread(new Runnable() {
+                                @Override
+                                public void run() {
+                                    String displayText = scorePercentage + "% prob";
+                                    reviewFromHF.setText(displayText);
+                                }
+                            });
+
+                            // Exit the loop once LABEL_1 is found
+                            break;
+                        }
                     }
-                });
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
             }
 
             @Override
