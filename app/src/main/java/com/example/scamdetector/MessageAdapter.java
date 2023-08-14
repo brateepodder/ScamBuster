@@ -74,9 +74,7 @@ public class MessageAdapter extends RecyclerView.Adapter<MessageAdapter.MessageV
         apiService.makeRequest(message, new ApiService.Callback() {
             @Override
             public void onResponse(String result) {
-                // This method will be called when the API call is successful
-                Log.d("HuggingFaceResponse", result); // Add this log statement to display the full API response
-
+                Log.d("HuggingFaceResponse", result);
                 try {
                     JSONArray jsonArray = new JSONArray(result);
 
@@ -92,7 +90,7 @@ public class MessageAdapter extends RecyclerView.Adapter<MessageAdapter.MessageV
                             ((Activity) context).runOnUiThread(new Runnable() {
                                 @Override
                                 public void run() {
-                                    String displayText = scorePercentage + "% scam/spam";
+                                    String displayText = scorePercentage + "% scam";
                                     reviewFromHF.setText(displayText);
                                 }
                             });
@@ -148,11 +146,11 @@ public class MessageAdapter extends RecyclerView.Adapter<MessageAdapter.MessageV
     }
 
     //private void copyMessageToClipboard(String message) {
-        //ClipboardManager clipboardManager = (ClipboardManager) context.getSystemService(Context.CLIPBOARD_SERVICE);
-        //if (clipboardManager != null) {
-          //  ClipData clipData = ClipData.newPlainText("message", message);
-            //clipboardManager.setPrimaryClip(clipData);
-            //Toast.makeText(context, "Message copied to clipboard", Toast.LENGTH_SHORT).show();
-        //}
+    //ClipboardManager clipboardManager = (ClipboardManager) context.getSystemService(Context.CLIPBOARD_SERVICE);
+    //if (clipboardManager != null) {
+    //  ClipData clipData = ClipData.newPlainText("message", message);
+    //clipboardManager.setPrimaryClip(clipData);
+    //Toast.makeText(context, "Message copied to clipboard", Toast.LENGTH_SHORT).show();
+    //}
     //}
 }

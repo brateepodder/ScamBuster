@@ -26,5 +26,11 @@
         <item name="hintTextColor">#808080</item>
         ....
     </style>
-    <style name="Theme.ScamDetector" parent="Base.Theme.ScamDetector" />
+    <style name="ListViewFontIncrease">
+    <item name="android:textSize">50dp</item>
+    </style>
+
+    <style name="CustomFontStyle">
+            <item name="android:textSize">14sp</item>
+    </style>
 </resources>

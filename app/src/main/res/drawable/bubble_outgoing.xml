@@ -4,10 +4,12 @@
     android:background="#ffffff">
 
     <corners
-        android:bottomRightRadius="8dp"
-        android:topLeftRadius="8dp"
-        android:topRightRadius="8dp" />
+        android:bottomRightRadius="300dp"
+        android:topLeftRadius="25dp"
+        android:topRightRadius="75dp"
+        android:bottomLeftRadius="25dp"
+        />
 
-    <solid android:color="#37b7c7" />
+    <solid android:color="#0096FF" />
 
 </shape>

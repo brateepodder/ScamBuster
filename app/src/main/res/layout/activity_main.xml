@@ -4,7 +4,7 @@
         xmlns:tools="http://schemas.android.com/tools"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:background="#ffffff"
+        android:background="#F5F5F5"
         android:focusableInTouchMode="true"
         tools:context=".MainActivity">
 
@@ -12,10 +12,10 @@
             android:id="@+id/toolbar"
             android:layout_width="match_parent"
             android:layout_height="?attr/actionBarSize"
-            android:background="#ffffff"
+            android:background="#F5F5F5"
             android:elevation="0dp"
             android:title="ScamBuster"
-            android:layout_marginLeft="5dp"
+            android:layout_marginStart="5dp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
@@ -24,22 +24,32 @@
             app:titleTextAppearance="@style/ScamDetector.Toolbar.Title"
             app:titleTextColor="#777777" />
 
-    <ListView
-        android:id="@+id/phoneNumberListView"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:layout_marginStart="0dp"
-        android:layout_marginTop="270dp"
-        android:layout_marginEnd="0dp"
-        android:layout_marginBottom="0dp"
-        android:divider="@android:color/transparent"
-        android:dividerHeight="10.0sp"></ListView>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            style="@style/ListViewFontIncrease"
+            android:textSize="50dp"
+            android:orientation="vertical">
+
+            <ListView
+                android:id="@+id/phoneNumberListView"
+                android:layout_width="match_parent"
+                android:layout_height="646dp"
+                android:layout_marginStart="0dp"
+                android:layout_marginTop="240dp"
+                android:layout_marginEnd="0dp"
+                android:scrollbarAlwaysDrawVerticalTrack="true"
+                android:layout_marginBottom="0dp"
+                android:divider="@color/divider1"
+                android:dividerHeight="2dp"
+                android:paddingLeft="5dp"/>
+        </LinearLayout>
 
     <TextView
         android:id="@+id/NoResultsFound"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="138dp"
+        android:layout_marginStart="95dp"
         android:layout_marginTop="270dp"
         android:text="@string/no_results_found"
         android:textColor="#808070"
@@ -50,10 +60,9 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentEnd="true"
-        android:layout_marginLeft="140dp"
-        android:layout_marginTop="200dp"
-        android:layout_marginEnd="94dp"
-        android:maxWidth="60dp"
+        android:layout_marginTop="180dp"
+        android:layout_marginEnd="30dp"
+        android:maxWidth="50dp"
         android:maxHeight="50dp"
         android:minWidth="60dp"
         android:minHeight="50dp"
@@ -70,31 +79,33 @@
         android:id="@+id/searchEditText"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginLeft="60dp"
-        android:layout_marginTop="200dp"
-        android:layout_marginRight="160dp"
-        android:hint="Search Number" />
+        android:layout_marginStart="30dp"
+        android:layout_marginTop="180dp"
+        android:layout_marginEnd="110dp"
+        android:hint="Search Number"
+        android:minHeight="48dp" />
 
     <com.google.android.material.textfield.TextInputEditText
         android:id="@+id/EditText"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginLeft="60dp"
-        android:layout_marginTop="100dp"
-        android:layout_marginRight="160dp"
-        android:hint="Send request to scambot" />
+        android:layout_marginStart="30dp"
+        android:layout_marginTop="80dp"
+        android:layout_marginEnd="130dp"
+        android:hint="Send request to scambot"
+        android:minHeight="48dp" />
 
     <Button
         android:id="@+id/buttonSendRequest"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginLeft="260dp"
-        android:layout_marginTop="100dp"
-        android:layout_marginRight="40dp"
+        android:layout_marginStart="300dp"
+        android:layout_marginTop="80dp"
+        android:layout_marginEnd="5dp"
+        android:backgroundTint="#ef476f"
         android:backgroundTintMode="add"
         android:text="@string/send_request"
-        android:textColor="#808080"
-        android:backgroundTint="#ef476f"
+        android:textColor="#FFFFFF"
         android:visibility="visible"
         tools:visibility="visible" />
 
@@ -102,11 +113,10 @@
         android:id="@+id/textViewResult"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignEnd="@+id/EditText"
-        android:layout_marginLeft="60dp"
-        android:layout_marginTop="175dp"
-        android:layout_marginEnd="133dp"
-        android:text="@string/textview" />
+        android:layout_marginStart="60dp"
+        android:layout_marginTop="150dp"
+        android:paddingStart="50dp"
+        android:textStyle="bold" />
 
 
 </RelativeLayout>

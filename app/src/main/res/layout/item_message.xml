@@ -4,62 +4,82 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:layout_marginBottom="2dp"
-    android:background="#ffffff">
+    android:background="#F5F5F5">
 
-    <Button
-        android:id="@+id/ratingbutton"
-        android:layout_width="wrap_content"
+    <RelativeLayout
+        android:id="@+id/messagesRelativeLayout"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginStart="300dp"
-        android:height="50dp"
-        android:backgroundTint="#ef476f"
-        android:includeFontPadding="false"
-        android:maxWidth="68dp"
-        android:maxHeight="8dp"
-        android:text="Scan Now!"
-        android:textSize="12sp"
-        app:iconPadding="0dp" />
+        android:layout_marginRight="110dp"
+        android:layout_marginBottom="10dp"
+        android:background="#F5F5F5">
 
-    <TextView
-        android:id="@+id/reviewFromHF"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="300dp"
-        android:layout_marginTop="50dp"
-        android:maxWidth="68dp"
-        android:maxHeight="20dp"
-        android:text="TextView" />
+        <TextView
+            android:id="@+id/messageTextView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="8dp"
+            android:background="@drawable/bubble_outgoing"
+            android:maxWidth="280dp"
+            android:paddingStart="12dp"
+            android:paddingTop="8dp"
+            android:paddingEnd="12dp"
+            android:paddingBottom="8dp"
+            android:padding="8dp"
+            android:textColor="#ffffff"
+            android:textSize="16sp" />
 
-    <TextView
-        android:id="@+id/messageTextView"
-        android:layout_width="250dp"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="8dp"
-        android:background="@drawable/bubble_outgoing"
-        android:paddingStart="12dp"
-        android:paddingTop="8dp"
-        android:paddingEnd="12dp"
-        android:paddingBottom="8dp"
-        android:textColor="#FFFFFF"
-        android:textSize="16sp" />
+        <TextView
+            android:id="@+id/dateTextView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/messageTextView"
+            android:layout_alignStart="@id/messageTextView"
+            android:layout_marginTop="1sp"
+            android:textColor="#707070"
+            android:textSize="12sp" />
 
-    <TextView
-        android:id="@+id/dateTextView"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_below="@id/messageTextView"
-        android:layout_alignStart="@id/messageTextView"
-        android:layout_marginTop="1sp"
-        android:textColor="#707070"
-        android:textSize="12sp" />
+        <TextView
+            android:id="@+id/timeTextView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/dateTextView"
+            android:layout_alignStart="@id/dateTextView"
+            android:textColor="#808080"
+            android:textSize="11.1sp" />
 
-    <TextView
-        android:id="@+id/timeTextView"
-        android:layout_width="wrap_content"
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:id="@+id/ratingRelativeLayout"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_below="@id/dateTextView"
-        android:layout_alignStart="@id/dateTextView"
-        android:textColor="#808080"
-        android:textSize="11.1sp"
-        />
+        android:layout_marginStart="295dp"
+        android:width="@id/messagesRelativeLayout"
+        android:background="#F5F5F5"
+        android:gravity="center_vertical|center_horizontal">
+
+        <Button
+            android:id="@+id/ratingbutton"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="5dp"
+            android:layout_marginEnd="5dp"
+            android:backgroundTint="#EAEAEA"
+            android:maxWidth="68dp"
+            android:text="Scan"
+            android:textColor="#333333" />
+
+        <TextView
+            android:id="@+id/reviewFromHF"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="50dp"
+            android:paddingStart="17dp"
+            android:textSize="16sp"
+            android:textStyle="bold" />
+
+    </RelativeLayout>
+
+
 </RelativeLayout>

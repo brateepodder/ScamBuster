@@ -1,7 +1,6 @@
 package com.example.scamdetector;
 
 import android.Manifest;
-import android.app.Activity;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.database.Cursor;
@@ -12,7 +11,6 @@ import android.text.Editable;
 import android.text.TextWatcher;
 import android.util.Log;
 import android.view.View;
-import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
@@ -45,7 +43,6 @@ public class MainActivity extends AppCompatActivity {
     private TextView textViewResult;
     private TextView NoResultsFound;
     private EditText editTextRequest;
-    private Button buttonSendRequest;
     private ApiService apiService;
 
     @Override
@@ -76,17 +73,14 @@ public class MainActivity extends AppCompatActivity {
         }
 
         // Set up click listener for the phone number list items
-        phoneNumberListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-            @Override
-            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                String selectedNumber = phoneNumberList.get(position);
-                Intent intent = new Intent(MainActivity.this, ConversationActivity.class);
-                intent.putExtra("phoneNumber", selectedNumber);
-                startActivity(intent);
-            }
+        phoneNumberListView.setOnItemClickListener((parent, view, position, id) -> {
+            String selectedNumber = phoneNumberList.get(position);
+            Intent intent = new Intent(MainActivity.this, ConversationActivity.class);
+            intent.putExtra("phoneNumber", selectedNumber);
+            startActivity(intent);
         });
 
-    // Set up text watcher for the search EditText
+        // Set up text watcher for the search EditText
         searchEditText.addTextChangedListener(new TextWatcher() {
             @Override
             public void beforeTextChanged(CharSequence s, int start, int count, int after) {
@@ -110,33 +104,22 @@ public class MainActivity extends AppCompatActivity {
 
         clearButton = findViewById(R.id.button);
 
-        searchEditText.setOnFocusChangeListener(new View.OnFocusChangeListener() {
-            @Override
-            public void onFocusChange(View v, boolean hasFocus) {
-                if (hasFocus) {
-                    clearButton.setVisibility(View.VISIBLE);
-                } else {
-                    clearButton.setVisibility(View.GONE);
-                }
+        searchEditText.setOnFocusChangeListener((v, hasFocus) -> {
+            if (hasFocus) {
+                clearButton.setVisibility(View.VISIBLE);
+            } else {
+                clearButton.setVisibility(View.GONE);
             }
         });
 
-        clearButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                searchEditText.setText("");
-            }
-        });
+        clearButton.setOnClickListener(v -> searchEditText.setText(""));
         // Initialize the EditText and Button for the request
         editTextRequest = findViewById(R.id.EditText);
-        buttonSendRequest = findViewById(R.id.buttonSendRequest);
+        Button buttonSendRequest = findViewById(R.id.buttonSendRequest);
 
-        buttonSendRequest.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                String requestText = editTextRequest.getText().toString();
-                sendToHuggingface(requestText);
-            }
+        buttonSendRequest.setOnClickListener(v -> {
+            String requestText = editTextRequest.getText().toString();
+            sendToHuggingface(requestText);
         });
     }
 
@@ -214,12 +197,9 @@ public class MainActivity extends AppCompatActivity {
                             int scorePercentage = (int) (labelScore * 100);
 
                             // Set the result in textViewResult
-                            runOnUiThread(new Runnable() {
-                                @Override
-                                public void run() {
-                                    String displayText = scorePercentage + "% scam/spam";
-                                    textViewResult.setText(displayText);
-                                }
+                            runOnUiThread(() -> {
+                                String displayText = scorePercentage + "% scam/spam";
+                                textViewResult.setText(displayText);
                             });
 
                             // Exit the loop once LABEL_1 is found
