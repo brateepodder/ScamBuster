@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">Scam Detector</string>
+    <string name="app_name">Scam Buster</string>
     <string name="title_activity_conversation">ConversationActivity</string>
     <!-- Strings used for fragments for navigation -->
     <string name="first_fragment_label">First Fragment</string>
